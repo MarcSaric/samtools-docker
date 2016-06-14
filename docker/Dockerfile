@@ -1,6 +1,6 @@
 FROM quay.io/jeremiahsavage/cdis_base
 
-ENV samtools_docker 0.1
+ENV samtools_docker 0.2
 
 MAINTAINER Jeremiah H. Savage <jeremiahsavage@gmail.com>
 
