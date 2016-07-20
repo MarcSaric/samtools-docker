@@ -10,6 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --force-yes \
     bzip2 \
+    gcc \
     libncurses-dev \
     sudo \
     wget
