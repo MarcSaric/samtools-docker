@@ -9,6 +9,7 @@ USER root
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --force-yes \
+    bzip2 \
     libncurses-dev \
     sudo \
     wget
