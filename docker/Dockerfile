@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --force-yes \
     bzip2 \
     gcc \
     libncurses-dev \
+    make \
     sudo \
     wget \
     zlib1g-dev
