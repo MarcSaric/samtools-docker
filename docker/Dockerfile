@@ -1,14 +1,10 @@
-FROM ubuntu:16.04
+FROM ubuntu:xenial-20160713
 
 MAINTAINER Jeremiah H. Savage <jeremiahsavage@gmail.com>
 
-ENV samtools_docker 0.1
-
 USER root
 
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update && apt-get install -y --force-yes \
+RUN apt-get update && apt-get install -y \
     bzip2 \
     gcc \
     libncurses-dev \
@@ -25,12 +21,6 @@ RUN wget https://github.com/samtools/samtools/releases/download/1.3.1/samtools-1
     && cd samtools-1.3.1 \
     && ./configure --prefix=/usr/local \
     && make \
-    && make install
-
-RUN adduser --disabled-password --gecos '' ubuntu && adduser ubuntu sudo && echo "ubuntu	ALL=(ALL)	NOPASSWD:ALL" >> /etc/sudoers.d/ubuntu
-
-USER ubuntu
-
-ENV HOME /home/ubuntu
-
-WORKDIR ${HOME}
+    && make install \
+    && cd - \
+    && rm -rf samtools-1.3.1
