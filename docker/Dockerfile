@@ -1,4 +1,4 @@
-FROM ubuntu:xenial-20160809
+FROM ubuntu:xenial-20161010
 
 MAINTAINER Jeremiah H. Savage <jeremiahsavage@gmail.com>
 
@@ -11,7 +11,6 @@ RUN apt-get update \
        wget \
        zlib1g-dev \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && wget https://github.com/samtools/samtools/releases/download/1.3.1/samtools-1.3.1.tar.bz2 \
     && tar xf samtools-1.3.1.tar.bz2 \
     && cd samtools-1.3.1 \
@@ -19,4 +18,5 @@ RUN apt-get update \
     && make \
     && make install \
     && cd - \
-    && rm -rf samtools-1.3.1*
+    && rm -rf samtools-1.3.1* \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
