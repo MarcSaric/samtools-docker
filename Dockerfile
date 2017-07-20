@@ -6,6 +6,7 @@ RUN apt-get update \
     && apt-get install -y \
        bzip2 \
        gcc \
+       libbz2-dev \
        libncurses-dev \
        make \
        wget \
