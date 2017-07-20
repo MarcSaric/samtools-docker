@@ -7,6 +7,7 @@ RUN apt-get update \
        bzip2 \
        gcc \
        libbz2-dev \
+       liblzma-dev \
        libncurses-dev \
        make \
        wget \
