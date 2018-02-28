@@ -13,12 +13,12 @@ RUN apt-get update \
        wget \
        zlib1g-dev \
     && apt-get clean \
-    && wget https://github.com/samtools/samtools/releases/download/1.6/samtools-1.6.tar.bz2 \
-    && tar xf samtools-1.6.tar.bz2 \
-    && cd samtools-1.6 \
+    && wget https://github.com/samtools/samtools/releases/download/1.7/samtools-1.7.tar.bz2 \
+    && tar xf samtools-1.7.tar.bz2 \
+    && cd samtools-1.7 \
     && ./configure --prefix=/usr/local \
     && make \
     && make install \
     && cd - \
-    && rm -rf samtools-1.6* \
+    && rm -rf samtools-1.7* \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
