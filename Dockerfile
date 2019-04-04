@@ -1,4 +1,4 @@
-FROM ubuntu:bionic-20180426
+FROM ubuntu:disco-20190310
 
 MAINTAINER Jeremiah H. Savage <jeremiahsavage@gmail.com>
 
