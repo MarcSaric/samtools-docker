@@ -3,7 +3,7 @@ FROM ubuntu:disco-20190310
 MAINTAINER Jeremiah H. Savage <jeremiahsavage@gmail.com>
 
 RUN apt-get update \
-    && apt-get dist-upgrade -y
+    && apt-get dist-upgrade -y \
     && apt-get install -y \
         bzip2 \
         gcc \
@@ -31,5 +31,5 @@ RUN apt-get update \
         make \
         wget \
         zlib1g-dev \
-    && apt-get autoremove -y
+    && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
