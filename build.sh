@@ -1,7 +1,9 @@
 #!/bin/bash
 
+set -eo pipefail
+
 function build {
-	make -C $1 build
+	make -C $1 docker-login build
 }
 
 function publish {
