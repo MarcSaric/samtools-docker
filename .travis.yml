@@ -1,28 +1,20 @@
-# Template Travis config to build and publish Docker images
-# Publishes staging tags for all non-master branches.
-# Only publishes release image tags when master updated.
-
-# IMPORTANT: Disable PR builds, since these branches are treated as master
 services:
-  - docker
-
+- docker
 install: make build
-
 stages:
-  - name: echo
-  - name: publish
-    if: branch = master AND type != pull_request
-
+- name: echo
+- name: publish
+  if: branch = master AND type != pull_request
 jobs:
   include:
-    - stage: echo
-      script: echo
-    - stage: publish
-      name: Publish production image
-      script:
-        - docker login -u="$QUAY_USERNAME" -p="$QUAY_PASSWORD" quay.io
-        - make publish
-
+  - stage: echo
+    script: echo
+  - stage: publish
+    name: Publish production image
+    script:
+    - docker login -u="$QUAY_USERNAME" -p="$QUAY_PASSWORD" quay.io
+    - make publish
 env:
   global:
-  # Add encrypted Quay creds here
+  - secure: YxNdqW6k0PkqLCV9oQ3fy4N0YlmMnmxpxUd5H0BFGz9iPNz/qCxhhEzVQVTZlAeReZnTrl3gcO41Mm59XtwOZmJDMXT29LtGY7z+nuENVvbllfKgA2xGbgNJ5t3sTC3KrOs05xa6nso3RQ0tVtBxC7MI7Jg8P+oWj7xUtMfnlhE3NbnAYIGRcXAw7uuvAwiAMRKQO8buG27kz6g10dBuMhGAA6cWfxYMw8Iw+3TgEcvesTLEsuSSnBDyaTPt8xCU8VaIDgfrY9NGwA5I02B5DrsRA6mPRUzPcsRWFtJyUlI2aQTZYpl+s9aOij75Pn/tc73uhOz8UfjXty1ktZIxY8ohuRKgvwG3pE/2+btZN+xkN0h42WslU48I4ML0gsjegNhogtDVK0VP80GkQ97fpKJ3+TN4LfGHQM9ITys9yYtoqHAMUimH2LuItCBF5XWpA/M0NuQNrAq2K9vNZvr9+2AGdiXYumanjeqjq/a9w64ch71l+EDWhUr+SS0ls0EZFNJO1tlzVjaqJ0xgKTxAfzEMT5MyyzrpZn3rsKa5l5bDFxuTUHPa0c31io1HVoEJ4OkWiXh5fHvAJ/3nCHR3QEgQ2OxuawIDnUDiN+na9OZ4eNqpSnkht7XZOtTsuyQzgvxzyFgga0G0y6wZV+pgg+RqheDnBB0I6S0sflOWfp4=
+  - secure: N9Ny31oSK/XpqeT8jtU09bc1funUMFbGYAbFcMB7aiqP+HPsmW2SIVpUYZ7MalYxctmfLqI6uuV33yImhkopCz33wSZjFrwJEgYrBIJbvkTtFRdo3vdaRJqIs0THGNq9zWtp4a+EWv/a0i41mmKDrdvBO76KbwJmZAqQY3Y4ORKkonTEUxNV9nbOxW54PAGtmcdQa27xXRxJDFog16Kj10QoyDgn3CgagvRo3Uh5anBC9yA3I4g5nSY3QOGq4mW0R3GTQ0gZXRUH+LmrJL93hAuddPt4kSdraDsKA7lblL2Kp4YU5U8hvYeF5cJ+V8oShuJpgk2gWupZB+hgW6N1T0PQMwuTpxkwbvOmb9LMaNf3aFhkJLi79ekD2B2SME2W91lpYI3VGZBSvHNyL56LDfML6w5veGEK151bgjv1bEb7zcDUTXfQ9QePVbRnrepmFIgaevMLrxkj1PEHkHevQ2E6+8MP7/oDAcZ6FRBPH70ifmPF6zwovgyivh2VapBFtDwt5JTi8ak2EaqyOtNSvCuxgWtYBBtyS8LdAbbIchT6Kr4bunBh2HdouH7AF30W1UG1Z6f4SvPRAeBDuR475U4Tvp7PyU7h0yvdbsy3rTMzepAnnu/5FqIOSrVet1mLmm+imJCEIPrdCdTMIjsdntW7OFdtRvH3TnN6VofSHLA=
