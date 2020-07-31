@@ -28,7 +28,7 @@ build-docker:
 	@echo -- Building docker --
 	docker build . \
 		--file ./Dockerfile \
-		--build-arg NAME=${NAME} \
+		--build-arg VERSION=${VERSION} \
 		-t "${DOCKER_IMAGE}"
 
 .PHONY: publish

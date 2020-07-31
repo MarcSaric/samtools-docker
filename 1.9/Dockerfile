@@ -1,9 +1,12 @@
-FROM ubuntu:disco-20190310
+FROM quay.io/ncigdc/bio-u18:latest
 
-MAINTAINER Jeremiah H. Savage <jeremiahsavage@gmail.com>
+MAINTAINER Charles Czysz <czysz@uchicago.edu>
+
+ARG VERSION
+
+ENV SAMTOOLS_URL=https://github.com/samtools/samtools/releases/download/$VERSION/samtools-$VERSION.tar.bz2
 
 RUN apt-get update \
-    && apt-get dist-upgrade -y \
     && apt-get install -y \
         bzip2 \
         gcc \
@@ -13,15 +16,16 @@ RUN apt-get update \
         make \
         wget \
         zlib1g-dev \
-    && apt-get clean \
-    && wget https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2 \
-    && tar xf samtools-1.9.tar.bz2 \
-    && cd samtools-1.9 \
+    && apt-get clean
+
+RUN wget $SAMTOOLS_URL \
+    && tar xf samtools-$VERSION.tar.bz2 \
+    && cd samtools-$VERSION \
     && ./configure --prefix=/usr/local \
     && make \
     && make install \
     && cd - \
-    && rm -rf samtools-1.9* \
+    && rm -rf samtools-$VERSION \
     && apt-get remove --purge -y \
         bzip2 \
         gcc \

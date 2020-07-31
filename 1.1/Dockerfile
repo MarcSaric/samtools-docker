@@ -1,26 +1,28 @@
-FROM ubuntu:18.04
-LABEL maintainer="sli6@uchicago.edu"
-LABEL version="1.1"
-LABEL description="Python wrapper of multithreading mpileup in samtools-1.1"
+FROM quay.io/ncigdc/bio-alpine:latest AS build
 
-RUN apt update -y \
-	&& apt install -y \
-	bzip2 \
-	gcc \
-	libncurses-dev \
+ARG VERSION
+
+ENV SAMTOOLS_URL=http://sourceforge.net/projects/samtools/files/samtools/$VERSION/samtools-$VERSION.tar.bz2
+
+RUN apk add \
+	autoconf \
+	automake \
 	make \
+	gcc \
+	musl-dev \
+	perl \
+	zlib-dev \
+	bzip2-dev \
+	xz-dev \
 	wget \
-	zlib1g-dev \
-	libbz2-dev \
-	liblzma-dev \
-    software-properties-common
+	libressl-dev \
+	ncurses-dev
 
-RUN	cd /opt/ \
-	&& wget http://sourceforge.net/projects/samtools/files/samtools/1.1/samtools-1.1.tar.bz2 \
-	&& tar xf samtools-1.1.tar.bz2 \
-	&& cd samtools-1.1 \
+RUN wget $SAMTOOLS_URL \
+	&& tar xf samtools-$VERSION.tar.bz2 \
+	&& cd samtools-$VERSION \
 	&& make \
 	&& make install \
 	&& cd - \
-	&& rm -rf
+	&& rm -rf samtools-$VERSION
 
