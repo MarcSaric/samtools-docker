@@ -28,13 +28,11 @@ build-docker:
 	@echo -- Building docker --
 	docker build . \
 		--no-cache \
-		--file ./Dockerfile.alpine \
+		--file ./Dockerfile \
 		--build-arg VERSION=${VERSION} \
 		-t "${DOCKER_IMAGE}"
 
 .PHONY: publish
-
 publish: docker-login
-	docker tag ${DOCKER_IMAGE_LATEST} ${DOCKER_IMAGE}
 	docker push ${DOCKER_IMAGE}
 

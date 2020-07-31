@@ -27,13 +27,11 @@ build-docker:
 	@echo
 	@echo -- Building docker --
 	docker build . \
-		--file ./Dockerfile \
+		--file ../Dockerfile.github \
 		--build-arg VERSION=${VERSION} \
 		-t "${DOCKER_IMAGE}"
 
 .PHONY: publish
-
 publish: docker-login
-	docker tag ${DOCKER_IMAGE_LATEST} ${DOCKER_IMAGE}
 	docker push ${DOCKER_IMAGE}
 
