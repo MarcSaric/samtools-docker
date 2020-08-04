@@ -1,0 +1,27 @@
+FROM quay.io/ncigdc/bio-alpine:latest AS builder
+
+MAINTAINER Charles Czysz <czysz@uchicago.edu>
+
+ARG VERSION
+
+ENV SAMTOOLS_URL=https://github.com/samtools/samtools/releases/download/$VERSION/samtools-$VERSION.tar.bz2
+
+RUN apk add \
+	autoconf \
+	automake \
+	make \
+	gcc \
+	musl-dev \
+	perl \
+	zlib-dev \
+	bzip2-dev \
+	xz-dev \
+	wget \
+	libressl-dev \
+	ncurses-dev
+
+RUN wget $SAMTOOLS_URL \
+	&& tar xf samtools-$VERSION.tar.bz2 \
+	&& make -C samtools-$VERSION \
+	&& make -C samtools-$VERSION install \
+	&& rm -rf samtools-$VERSION
